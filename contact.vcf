@@ -1,6 +1,8 @@
 BEGIN:VCARD
 VERSION:3.0
-FN:PrintQ by HumbleSolutions
-ORG:HumbleSolutions
-TEL;TYPE=CELL:+919350327725
+N:;PrintQ;;;
+FN:PrintQ
+ORG:Humble Solutions
+TITLE:Customer Support
+TEL;TYPE=CELL,VOICE:+919350327725
 END:VCARD
