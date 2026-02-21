@@ -69,18 +69,29 @@
   <script>
     window.addEventListener('load', function () {
       const ua = navigator.userAgent;
-      // All browsers on iOS (Safari, Chrome, Firefox) run on WebKit and expose iPhone/iPad/iPod
-      // Also catch iPads on iOS 13+ which report as MacIntel but have touch
       const isIOS = /iPhone|iPad|iPod/i.test(ua) ||
                     (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
 
       if (isIOS) {
-        // For iOS: just show the fallback button, let user tap to trigger native Contacts sheet
-        // (programmatic click on download is blocked by many iOS browsers)
-        document.getElementById('status').textContent = '👇 Tap below to save contact';
-        document.getElementById('fallback').style.display = 'block';
+        document.getElementById('status').textContent = '⏳ Saving contact…';
+
+        // Try auto-download
+        const link = document.createElement('a');
+        link.href = 'contact.vcf';
+        link.download = 'PrintQ-HumbleSolutions.vcf';
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+
+        // After a short delay, update status and show fallback button silently
+        // Do NOT redirect anywhere if it fails — just show the button
+        setTimeout(function () {
+          document.getElementById('status').textContent = '✅ Contact card sent!';
+          document.getElementById('fallback').style.display = 'block';
+        }, 1500);
+
       } else {
-        // Redirect to WhatsApp for Android / desktop
+        // Non-iOS: redirect to WhatsApp
         window.location.href = 'https://wa.me/919350327725?text=Hi';
       }
     });
