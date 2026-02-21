@@ -68,17 +68,25 @@
 
   <script>
     window.addEventListener('load', function () {
-      const link = document.createElement('a');
-      link.href = 'contact.vcf';
-      link.download = 'PrintQ-HumbleSolutions.vcf';
-      document.body.appendChild(link);
-      link.click();
-      document.body.removeChild(link);
+      const isIOS = /iPhone|iPad|iPod/i.test(navigator.userAgent);
 
-      setTimeout(function () {
-        document.getElementById('status').textContent = '✅ Contact card sent!';
-        document.getElementById('fallback').style.display = 'block';
-      }, 1500);
+      if (isIOS) {
+        // Auto-download vCard for iOS
+        const link = document.createElement('a');
+        link.href = 'contact.vcf';
+        link.download = 'PrintQ-HumbleSolutions.vcf';
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+
+        setTimeout(function () {
+          document.getElementById('status').textContent = '✅ Contact card sent!';
+          document.getElementById('fallback').style.display = 'block';
+        }, 1500);
+      } else {
+        // Redirect to WhatsApp for Android / desktop
+        window.location.href = 'https://wa.me/919350327725?text=Hi';
+      }
     });
   </script>
 </body>
