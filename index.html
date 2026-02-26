@@ -52,49 +52,25 @@
       transition: opacity 0.2s;
     }
     a.btn:active { opacity: 0.8; }
-    .hint { font-size: 13px; color: #aeaeb2; margin-top: 16px; }
   </style>
 </head>
 <body>
   <div class="card">
     <div class="avatar">🖨️</div>
     <h1>PrintQ</h1>
-    <div class="org">by HumbleSolutions</div>
+    <div class="org">by Humble Solutions</div>
     <div class="number">+91 93503 27725</div>
-    <div class="status" id="status"></div>
-    <a class="btn" href="contact.vcf" id="fallback" style="display:none;">Save to Contacts</a>
-    <p class="hint">If nothing happens, tap the button above.</p>
+    <div class="status" id="status">Opening contact…</div>
+    <a class="btn" href="contact.vcf">Save to Contacts</a>
   </div>
 
   <script>
-    window.addEventListener('load', function () {
-      const ua = navigator.userAgent;
-      const isIOS = /iPhone|iPad|iPod/i.test(ua) ||
-                    (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
-
-      if (isIOS) {
-        document.getElementById('status').textContent = '⏳ Saving contact…';
-
-        // Try auto-download
-        const link = document.createElement('a');
-        link.href = 'contact.vcf';
-        link.download = 'PrintQ-HumbleSolutions.vcf';
-        document.body.appendChild(link);
-        link.click();
-        document.body.removeChild(link);
-
-        // After a short delay, update status and show fallback button silently
-        // Do NOT redirect anywhere if it fails — just show the button
-        setTimeout(function () {
-          document.getElementById('status').textContent = '✅ Contact card sent!';
-          document.getElementById('fallback').style.display = 'block';
-        }, 1500);
-
-      } else {
-        // Non-iOS: redirect to WhatsApp
-        window.location.href = 'https://wa.me/919350327725?text=Hi';
-      }
-    });
+    window.onload = function() {
+      // Small delay for UI smoothness
+      setTimeout(function() {
+        window.location.href = "contact.vcf";
+      }, 800);
+    };
   </script>
 </body>
 </html>
