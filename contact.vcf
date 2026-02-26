@@ -1,8 +1,7 @@
 BEGIN:VCARD
 VERSION:3.0
-N:;PrintQ by Humble Solutions;;;
+N:PrintQ by Humble Solutions;;;;
 FN:PrintQ by Humble Solutions
-ORG:
-TITLE:
-TEL;TYPE=CELL,VOICE:+919350327725
+ORG:Humble Solutions Pvt Ltd
+TEL;TYPE=CELL:+919350327725
 END:VCARD
